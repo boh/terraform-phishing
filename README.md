@@ -22,6 +22,10 @@ Original Author: Marcello Salvati ([@byt3bl33d3r](https://twitter.com/byt3bl33d3
 **Read and change config-phish/phishing.tf** 
 
 ```
+
+# Set DO API token
+#~ export DIGITALOCEAN_TOKEN="token"
+
 # cd config-phish
 # Change the hostname and domain for phishing-server and redir-server (DNS records).
 # Change the Slack webhook URL.
