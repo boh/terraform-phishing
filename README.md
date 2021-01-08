@@ -26,6 +26,14 @@ Original Author: Marcello Salvati ([@byt3bl33d3r](https://twitter.com/byt3bl33d3
 # Set DO API token
 #~ export DIGITALOCEAN_TOKEN="token"
 
+# Install ansible to be able run ansible-playbook
+
+# Edit ansible defaults ~/.ansible.cfg and add:
+
+[defaults]
+host_key_checking = False
+command_warnings=False
+
 # cd config-phish
 # Change the hostname and domain for phishing-server and redir-server (DNS records).
 # Change the Slack webhook URL.
