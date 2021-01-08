@@ -65,6 +65,7 @@ module "phishing_redir_server" {
 # Known Bugs/Limitations
 
 - You need to **install Ansible**. 
+- Terraform **v11.x** was used, I'll provide a config upgrade to newer version ASAP. You can get this older version of terraform [here](https://releases.hashicorp.com/terraform/). I know, I know.. 
 - **terraform-provider-digitalocean_v1.23.0** provider was used . Terraform init might provide you with version 2.xx which is not compatible with this project.
 - SSH keys are deleted only when you explicitly run ```terraform destroy``` (https://github.com/hashicorp/terraform/issues/13549)
 - Currently this project is meant to create a phishing environment which is burnt after the campaign is over, the variable count was **never tested** with value > 1. 
