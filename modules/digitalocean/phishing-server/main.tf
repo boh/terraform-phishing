@@ -17,16 +17,16 @@ resource "digitalocean_tag" "gophish" {
     name = "gophish"
 }
 
-#resource "digitalocean_domain" "saferedirectioncom" {
-#    name = "saferedirection.com"
+#resource "digitalocean_domain" "examplecom" {
+#    name = "example.com"
 #    #ip_address = "${digitalocean_droplet.nginx_server.ipv4_address}"
 #    ip_address = "${digitalocean_droplet.phishing-server.*.ipv4_address[count.index]}"
 #}
 
-resource "digitalocean_record" "saferedirectioncom" {
+resource "digitalocean_record" "examplecom" {
     name = "${var.hostname-gophish}"
     type = "A"
-    #domain = "${digitalocean_domain.saferedirectioncom.name}"
+    #domain = "${digitalocean_domain.examplecom.name}"
     domain = "${var.domain-gophish}"
     value = "${digitalocean_droplet.phishing-server.*.ipv4_address[count.index]}"
 }
@@ -87,7 +87,7 @@ resource "null_resource" "ansible_provisioner" {
   count = "${signum(length(var.ansible_playbook)) == 1 ? var.count : 0}"
 
 #  depends_on = ["digitalocean_droplet.phishing-server"]
-  depends_on = ["digitalocean_record.saferedirectioncom"]
+  depends_on = ["digitalocean_record.examplecom"]
 
   triggers {
     droplet_creation = "${join("," , digitalocean_droplet.phishing-server.*.id)}"

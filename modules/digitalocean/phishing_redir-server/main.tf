@@ -182,7 +182,7 @@ resource "digitalocean_droplet" "redir-server" {
       "./install_postfix.sh ${var.hostname-rdir}.${var.domain-rdir} | tee /tmp/install_postfix.log",
       "postmap /etc/postfix/header_checks",
       "postfix reload",
-      "cut -d '\"' -f 2 \"/etc/opendkim/keys/saferedirection.com/mail.txt\" | tr -d \"[:space:]\""
+      "cut -d '\"' -f 2 \"/etc/opendkim/keys/example.com/mail.txt\" | tr -d \"[:space:]\""
     ]
 
     connection {
