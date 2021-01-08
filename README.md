@@ -26,6 +26,7 @@ Original Author: Marcello Salvati ([@byt3bl33d3r](https://twitter.com/byt3bl33d3
 # Change the hostname and domain for phishing-server and redir-server (DNS records).
 # Change the Slack webhook URL.
 # Change email@example.com in data/scripts/run_certbot.sh
+# search for example.com and change if needed 
 
 module "phishing_server" {
   source = "../modules/digitalocean/phishing-server"
