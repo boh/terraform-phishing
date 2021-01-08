@@ -70,7 +70,7 @@ module "phishing_redir_server" {
 - SSH keys are deleted only when you explicitly run ```terraform destroy``` (https://github.com/hashicorp/terraform/issues/13549)
 - Currently this project is meant to create a phishing environment which is burnt after the campaign is over, the variable count was **never tested** with value > 1. 
 - LetsEncrypt si installed via snapd. <u>Make sure your DNS works!</u> 
-- Make sure you change the value of TXT DKIM to a proper one. You can find it in the terraform output  on the line: module.phishing_redir_server.digitalocean_droplet.redir-server (remote-exec): **v=DKIM1;h=sha256;k=rsa;[...SNIP...]**
+- Make sure you change the value of TXT DKIM to a proper one. You can find it in the terraform output  on the line: module.phishing_redir_server.digitalocean_droplet.redir-server (remote-exec): **v=DKIM1;h=sha256;k=rsa;[...SNIP...]** or you can SSH into redir-server and run `cut -d '"' -f 2 "/etc/opendkim/keys/YOUR-DOMAIN/mail.txt\" | tr -d "[:space:]"`
 
 # License
 
