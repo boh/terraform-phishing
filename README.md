@@ -12,6 +12,10 @@
 
 - This configuration resulted in **Default Email from Gophish: 10/10** rating on [mail-tester.com](https://www.mail-tester.com/).
 
+- Installed gophish version is modified, you can track WORD documents, have default landing page (like 404) etc.
+
+- After the terraform apply is over, you can connect to https://YOUR-PHISHING-SERVER:3333, where your Gophish lives. You can alter the Gophish configuration (for example listen on localhost:3333 only) under /opt/gophish/config.json.
+
 
 # Original Author and Acknowledgments
 
