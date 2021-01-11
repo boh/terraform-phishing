@@ -1,4 +1,4 @@
-# Upgrace
+# Upgrade plan
 
 - Current working configuration is for older version of Terraform. This will be moved to a separate branch.
 - The code was upgraded to newer version of Terraform to support **FULL automation** including all DNS records etc.
