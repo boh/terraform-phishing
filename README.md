@@ -1,3 +1,9 @@
+# Upgrace
+
+- Current working configuration is for older version of Terraform. This will be moved to a separate branch.
+- The code was upgraded to newer version of Terraform to support **FULL automation** including all DNS records etc.
+- Expected time for an upgrade is January 2021.
+
 # terraform-phishing
 
 - This set of scripts is heavily based on *Red Baron*, which is a set of [modules](https://www.terraform.io/docs/modules/index.html) and custom/third-party providers for [Terraform](https://www.terraform.io/) which tries to automate creating resilient, disposable, secure and agile infrastructure for Red Teams.
