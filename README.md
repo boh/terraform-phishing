@@ -95,7 +95,7 @@ terraform apply
 
 Manually inspect the config file `phishing.tf` and proceed.
 
-Still in the `config-phish` directory, you must run the `terraform init` do initialize all the providers, then `terraform plan` to create a state file and validate the config, it everything looks OK finally `terraform apply` to apply the changes and create two droplets.
+Still in the `config-phish` directory, you must run the `terraform init` to initialize all the providers, then `terraform plan` to create a state file and validate the config, if everything looks OK finally run `terraform apply` to apply the changes and create two droplets.
 
 Running the `terraform apply` will ask for a confirmation.
 
