@@ -26,11 +26,11 @@ First we need the API key for your Digital Ocean account, when you have it ready
 
 Our phishig domain has to be managed via Digital Ocean, if you registered the domain on Godaddy, Namecheap or other registrar we need to **Add** it.
 
-![DO_create_domain](../docs/DO_create_domain.png)
+![](/docs/DO_create_domain.png)
 
 The newly added domain has only these DNS records set:
 
-![DO_created_fresh_domain](../docs/DO_created_fresh_domain.png)
+![DO_created_fresh_domain](/docs/DO_created_fresh_domain.png)
 
 We should verify, if it's true:
 
@@ -99,27 +99,27 @@ Still in the `config-phish` directory, you must run the `terraform init` do init
 
 Running the `terraform apply` will ask for a confirmation.
 
-![DO_terraform_apply_first](../docs/DO_terraform_apply_first.png)
+![DO_terraform_apply_first](/docs/DO_terraform_apply_first.png)
 
 After the command finishes you should see similar output:
 
-![DO_terraform_apply](../docs/DO_terraform_apply.png)
+![DO_terraform_apply](/docs/DO_terraform_apply.png)
 
 You should have now two droplets created and the DNS records for the domain set:
 
-![DO_configured_domain](../docs/DO_configured_domain.png)
+![DO_configured_domain](/docs/DO_configured_domain.png)
 
 If you've setup also the Slack Webhook, new messages appeared:
 
-![DO_slack_chan](../docs/DO_slack_chan.png)
+![DO_slack_chan](/docs/DO_slack_chan.png)
 
 After your campaign is over, delete the droplets, by issuing this command `terraform destroy`
 
-![DO_terraform_destroyed](../docs/DO_terraform_destroyed.png)
+![DO_terraform_destroyed](/docs/DO_terraform_destroyed.png)
 
 DNS records will be removed as well.
 
-![DO_dns-records-after-destroy](../docs/DO_dns-records-after-destroy.png)
+![DO_dns-records-after-destroy](/docs/DO_dns-records-after-destroy.png)
 
 ## Tips
 
