@@ -9,6 +9,6 @@ snap install core
 snap install --classic certbot
 ln -s /snap/bin/certbot /usr/bin/certbot
 
-#BETTER SAFE THAN SORRY - LETS WAIT FOR THE DNS ANOTHER 5 SECONDS
+#BETTER SAFE THAN SORRY - LETS WAIT FOR THE DNS ANOTHER 45 SECONDS
 sleep 5
-/usr/bin/certbot certonly --expand -d $HOSTS -n --standalone --agree-tos --email email@example.com
+/usr/bin/certbot certonly --expand -d $HOSTS -n --standalone --agree-tos --email bfho@pm.me

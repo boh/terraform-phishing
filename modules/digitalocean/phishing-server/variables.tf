@@ -1,21 +1,21 @@
-variable "count" {
+variable "vmcount" {
   default = 1
 }
 
 variable "ansible_playbook" {
-  default = "../data/playbooks/install_gophish.yml"
+  default     = "../data/playbooks/install_gophish.yml"
   description = "Ansible Playbook to run"
 }
 
 variable "ansible_arguments" {
-  default = []
-  type    = "list"
+  default     = []
+  type        = list(string)
   description = "Additional Ansible Arguments"
 }
 
 variable "ansible_vars" {
-  default = []
-  type    = "list"
+  default     = []
+  type        = list(string)
   description = "Environment variables"
 }
 
@@ -24,12 +24,12 @@ variable "size" {
 }
 
 variable "regions" {
-  type = "list"
+  type    = list(string)
   default = ["AMS3"]
 }
 
 variable "available_regions" {
-  type = "map"
+  type = map(string)
   default = {
     "NYC1" = "nyc1"
     "NYC2" = "nyc2"
@@ -47,13 +47,14 @@ variable "available_regions" {
 }
 
 variable "hostname-gophish" {
-  type = "string"
+  type = string
 }
 
 variable "domain-gophish" {
-  type = "string"
+  type = string
 }
 
 variable "slack" {
-  type = "string"
+  type = string
 }
+

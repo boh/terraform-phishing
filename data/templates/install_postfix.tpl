@@ -9,6 +9,8 @@ fi
 
 # INITIALIZE
 echo "Updating and Installing Dependicies"
+#apt-get -qq update > /dev/null 2>&1
+#apt-get -qq -y upgrade > /dev/null 2>&1
 apt-get install -qq -y nmap > /dev/null 2>&1
 apt-get install -qq -y git > /dev/null 2>&1
 rm -r /var/log/exim4/ > /dev/null 2>&1
@@ -29,6 +31,32 @@ net.ipv6.conf.tun0.disable_ipv6 = 1
 EOF
 
 sysctl -p > /dev/null 2>&1
+#cat <<-EOF > /etc/hosts
+#127.0.0.1 localhost
+#EOF
+
+#cat <<-EOF > /etc/hostname
+#$primary_domain
+#EOF
+
+# GET CERT
+# use snap to install certbot
+#apt -y install snapd
+#snap install core
+#snap install --classic certbot
+#ln -s /snap/bin/certbot /usr/bin/certbot
+#/usr/bin/certbot certonly --expand -d $HOSTS -n --standalone --agree-tos --email bfho@pm.me
+
+# INSTALL POSTFIX
+#echo "Installing Dependicies"
+#apt-get install -qq -y dovecot-imapd dovecot-lmtpd
+#apt-get install -qq -y postfix postgrey postfix-policyd-spf-python
+#apt-get install -qq -y opendkim opendkim-tools
+#apt-get install -qq -y opendmarc
+#apt-get install -qq -y mailutils
+
+#read -p "Enter your mail server's domain: " -r primary_domain
+#read -p "Enter IP's to allow Relay (if none just hit enter): " -r relay_ip
 echo "Configuring Postfix"
 
 cat <<-EOF > /etc/postfix/main.cf
@@ -142,12 +170,18 @@ service postfix restart
 service opendkim restart
 service opendmarc restart
 
+#echo "Checking Service Status"
+#service postfix status
+#service opendkim status
+#service opendmarc status
+
 # GET DNS ENTRIES
 
 extip=$(ifconfig|grep 'Link encap\|inet '|awk '!/Loopback|:127./'|tr -s ' '|grep 'inet'|tr ':' ' '|cut -d" " -f4)
 domain=$(ls /etc/opendkim/keys/ | head -1)
 fields=$(echo "${domain}" | tr '.' '\n' | wc -l)
 dkimrecord=$(cut -d '"' -f 2 "/etc/opendkim/keys/${domain}/mail.txt" | tr -d "[:space:]")
+cut -d '"' -f 2 "/etc/opendkim/keys/${domain}/mail.txt" | tr -d "[:space:]" > /tmp/dkim.txt
 
 if [[ $fields -eq 2 ]]; then
         cat <<-EOF > /tmp/dnsentries.txt

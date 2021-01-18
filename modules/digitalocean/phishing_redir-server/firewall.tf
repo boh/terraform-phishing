@@ -1,9 +1,9 @@
 terraform {
-  required_version = ">= 0.11.0"
+  required_version = ">= 0.12.0"
 }
 
 data "external" "get_public_ip" {
-  program = ["bash", "../data/scripts/get_public_ip.sh" ]
+  program = ["bash", "../data/scripts/get_public_ip.sh"]
 }
 
 resource "random_id" "firewall" {
@@ -13,62 +13,58 @@ resource "random_id" "firewall" {
 resource "digitalocean_firewall" "web" {
   name = "redir-server-only-allow-dns-http-ssh-smtp-${random_id.firewall.hex}"
 
-  droplet_ids = ["${digitalocean_droplet.redir-server.*.id}"]
+  droplet_ids = digitalocean_droplet.redir-server.*.id
 
-  inbound_rule = [
-    {
-      protocol         = "tcp"
-      port_range       = "25"
-      source_addresses = ["127.0.0.1/32", "${element(var.relay_from, count.index)}"]
-    },
-    {
-      protocol         = "tcp"
-      port_range       = "443"
-      source_addresses = ["0.0.0.0/0", "::/0"]
-    },
-    {
-      protocol         = "tcp"
-      port_range       = "80"
-      source_addresses = ["0.0.0.0/0", "::/0"]
-    },
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "25"
+    source_addresses = ["127.0.0.1/32", element(var.relay_from, 0)]
+  }
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "443"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "80"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "22"
+    source_addresses = ["${data.external.get_public_ip.result["ip"]}/32"]
+  }
+  inbound_rule {
+    protocol         = "udp"
+    port_range       = "60000-61000"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
 
-    {
-      protocol         = "tcp"
-      port_range       = "22"
-      source_addresses = ["${data.external.get_public_ip.result["ip"]}/32"]
-    },
-    {
-      protocol         = "udp"
-      port_range       = "60000-61000"
-      source_addresses = ["0.0.0.0/0", "::/0"]
-    }
-  ]
-
-  outbound_rule = [
-    {
-      protocol              = "tcp"
-      port_range            = "53"
-      destination_addresses = ["0.0.0.0/0", "::/0"]
-    },
-    {
-      protocol              = "tcp"
-      port_range            = "25"
-      destination_addresses = ["0.0.0.0/0", "::/0"]
-    },
-    {
-      protocol              = "udp"
-      port_range            = "53"
-      destination_addresses = ["0.0.0.0/0", "::/0"]
-    },
-    {
-      protocol              = "tcp"
-      port_range            = "443"
-      destination_addresses = ["0.0.0.0/0", "::/0"]
-    },
-    {
-      protocol              = "tcp"
-      port_range            = "80"
-      destination_addresses = ["0.0.0.0/0", "::/0"]
-    },
-  ]
+  outbound_rule {
+    protocol              = "tcp"
+    port_range            = "53"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+  outbound_rule {
+    protocol              = "tcp"
+    port_range            = "25"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+  outbound_rule {
+    protocol              = "udp"
+    port_range            = "53"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+  outbound_rule {
+    protocol              = "tcp"
+    port_range            = "443"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+  outbound_rule {
+    protocol              = "tcp"
+    port_range            = "80"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
 }
+
