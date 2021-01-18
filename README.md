@@ -93,7 +93,9 @@ terraform plan
 terraform apply
 ```
 
-Manually inspect the config file `phishing.tf` and proceed.
+Manually inspect the config file `phishing.tf` and proceed. 
+
+The default region is set to Amsterdam3 (AMS3), you can change it in `variables.tf` for a specific module.
 
 Still in the `config-phish` directory, you must run the `terraform init` to initialize all the providers, then `terraform plan` to create a state file and validate the config, if everything looks OK finally run `terraform apply` to apply the changes and create two droplets.
 
