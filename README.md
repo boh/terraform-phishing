@@ -24,7 +24,7 @@ Let's assume there's a domain called **opsecfail.me** a I want to use it in this
 
 First we need the API key for your Digital Ocean account, when you have it ready, save it - it'll be used to authenticate the terraform API calls. I usually save it as a ENV variable via `#~ export DIGITALOCEAN_TOKEN="token"` under `~/.zshrc`.
 
-Our phishig domain has to be managed via Digital Ocean, if you registered the domain on Godaddy, Namecheap or other registrar we need to **Add** it.
+Our phishig domain has to be managed via Digital Ocean, if you registered the domain on Godaddy, Namecheap or other registrar we need to configure custom Digital Ocean DNS servers for it and then **Add** it in Digital Ocean.
 
 ![](/docs/DO_create_domain.png)
 
